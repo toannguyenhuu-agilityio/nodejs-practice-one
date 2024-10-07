@@ -1,0 +1,72 @@
+export const mockPayload = {
+  number: 'ABCD-EF123',
+  name: 'Card 1',
+  type: 'Monster',
+  subTypes: 'Normal',
+  image: 'image1.png',
+  attribute: 'Dark',
+  level: 1,
+  attack: 100,
+  defense: 100,
+  description: 'Card 1 description',
+};
+
+export const mockQuery = {
+  limit: 10,
+  page: 1,
+  number: 'ABCD-EF123',
+  name: 'Card 1',
+  type: 'Monster',
+  subTypes: 'Normal',
+  image: 'image1.png',
+  attribute: 'Dark',
+  level: 1,
+  description: 'Card 1 description',
+  attackGe: 500,
+  attackLe: 1000,
+  defenseGe: 500,
+  defenseLe: 1000,
+};
+
+export const mockSingleCard = {
+  id: '1',
+  number: 'ABCD-EF123',
+  name: 'Card 1',
+  type: 'Monster',
+  subTypes: 'Normal',
+  image: 'image1.png',
+  attribute: 'Dark',
+  level: 1,
+  attack: 100,
+  defense: 100,
+  description: 'Card 1 description',
+};
+
+export const mockCards = [
+  {
+    id: '1',
+    number: 'ABCD-EF123',
+    name: 'Card 1',
+    type: 'Monster',
+    subTypes: 'Normal',
+    image: 'image1.png',
+    attribute: 'Dark',
+    level: 1,
+    attack: 100,
+    defense: 100,
+    description: 'Card 1 description',
+  },
+  {
+    id: '2',
+    number: 'ABCD-EF123',
+    name: 'Card 2',
+    type: 'Spell',
+    subTypes: 'Normal',
+    image: 'image2.png',
+    attribute: 'Light',
+    level: 2,
+    attack: 200,
+    defense: 200,
+    description: 'Card 2 description',
+  },
+];

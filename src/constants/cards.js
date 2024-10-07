@@ -1,0 +1,53 @@
+export const CARD_TYPES = {
+  MONSTER: 'Monster',
+  TRAP: 'Trap',
+  SPELL: 'Spell',
+};
+
+export const CARD_ATTRIBUTES = {
+  DARK: 'Dark',
+  LIGHT: 'Light',
+  EARTH: 'Earth',
+  WATER: 'Water',
+  FIRE: 'Fire',
+  WIND: 'Wind',
+  DIVINE: 'Divine',
+};
+
+export const CARD_SUB_TYPES = {
+  NORMAL: 'Normal',
+  RITUAL: 'Ritual',
+  EFFECT: 'Effect',
+  XYZ: 'XYZ',
+  TOON: 'Toon',
+  FUSION: 'Fusion',
+  SYNCHRO: 'Synchro',
+};
+
+export const VALID_CARD_TYPES = [
+  CARD_TYPES.MONSTER,
+  CARD_TYPES.TRAP,
+  CARD_TYPES.SPELL,
+];
+
+export const VALID_CARD_ATTRIBUTES = [
+  CARD_ATTRIBUTES.DARK,
+  CARD_ATTRIBUTES.LIGHT,
+  CARD_ATTRIBUTES.EARTH,
+  CARD_ATTRIBUTES.WATER,
+  CARD_ATTRIBUTES.FIRE,
+  CARD_ATTRIBUTES.WIND,
+  CARD_ATTRIBUTES.DIVINE,
+];
+
+export const VALID_CARD_SUB_TYPES = [
+  CARD_SUB_TYPES.NORMAL,
+  CARD_SUB_TYPES.RITUAL,
+  CARD_SUB_TYPES.EFFECT,
+  CARD_SUB_TYPES.XYZ,
+  CARD_SUB_TYPES.TOON,
+  CARD_SUB_TYPES.FUSION,
+  CARD_SUB_TYPES.SYNCHRO,
+];
+
+export const CARD_NUMBER_REGEX = /^[A-Z]{4}-[A-Z]{2}\d{3}$/;

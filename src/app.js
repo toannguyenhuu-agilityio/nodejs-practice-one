@@ -3,6 +3,8 @@ import express from 'express';
 import dotenv from 'dotenv';
 import jwt from 'jwt-simple';
 import { passportAuth } from './libs/passport.js';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 // DB
 import db from './libs/db.js';
@@ -32,6 +34,12 @@ const PORT = process.env.PORT;
 const app = express();
 
 appMiddleware(app);
+
+// Serve static files (index.html, CSS, JS, etc.)
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Extract controllers
 const { createToken } = TokenControllers(User, jwt);

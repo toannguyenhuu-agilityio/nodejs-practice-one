@@ -18,17 +18,21 @@ services:
           ignore:
             - node_modules/
   yugioh-app-prod:
+    secrets:
+      - sequelize_key
     build: .
     container_name: yugioh-app-prod
-    environment:
-      - NODE_ENV=production
-      - SECRET_KEY=Yugioh-secret-key
+    env_file:
+      - .env.prod
     ports:
       - 4000:3000
     volumes:
       - ./db:/app/db
     working_dir: /app
     command: npm start
+secrets:
+  sequelize_key:
+    environment: SECRET_KEY
 volumes:
   yugioh-db:
     driver: local

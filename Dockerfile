@@ -12,7 +12,7 @@ COPY package*.json ./
 RUN npm install --production=false
 
 # Stage for Development environment
-FROM base AS development
+FROM base AS dev
 ENV NODE_ENV=development
 # Install development dependencies
 RUN npm install --only=development
@@ -28,7 +28,7 @@ CMD ["npm", "run", "dev"]
 
 
 # Stage for Production environment
-FROM base AS production
+FROM base AS prod
 ENV NODE_ENV=production
 # Only install production dependencies
 RUN npm install --only=production

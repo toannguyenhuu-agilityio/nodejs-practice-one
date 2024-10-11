@@ -1,53 +1,59 @@
-# syntax=docker/dockerfile:1
-
-# Comments are provided throughout this file to help you get started.
-# If you need more help, visit the Dockerfile reference guide at
-# https://docs.docker.com/go/dockerfile-reference/
-
-# Want to help us make this template better? Share your feedback here: https://forms.gle/ybq9Krt8jtBL3iCk7
-
-ARG NODE_VERSION=20.12.0
-
+# Base image for Node.js
+ARG NODE_VERSION=20.12.0 
 FROM node:${NODE_VERSION}-alpine as base
+
+# Set the working directory inside the container
 WORKDIR /app
-# Expose the port that the application listens on.
+
+# Copy package files to the container (use package.json and package-lock.json)
+COPY package*.json ./
+
+# Install dependencies (for all environments)
+RUN npm install --production=false
+
+# Stage for Development environment
+FROM base AS development
+ENV NODE_ENV=development
+# Install development dependencies
+RUN npm install --only=development
+
+# Copy all the source files to the container
+COPY . .
+
+# Expose the port the app will run on
 EXPOSE 3000
 
+# Start the app in development mode (using nodemon or similar)
+CMD ["npm", "run", "dev"]
 
-FROM base as prod
-# Download dependencies as a separate step to take advantage of Docker's caching.
-# Leverage a cache mount to /root/.npm to speed up subsequent builds.
-# Leverage a bind mounts to package.json and package-lock.json to avoid having to copy them into
-# into this layer.
-RUN --mount=type=bind,source=package.json,target=package.json \
-    --mount=type=bind,source=package-lock.json,target=package-lock.json \
-    --mount=type=cache,target=/root/.npm \
-    npm ci --omit=dev
 
-# Run the application as a non-root user.
-USER node
+# Stage for Production environment
+FROM base AS production
+ENV NODE_ENV=production
+# Only install production dependencies
+RUN npm install --only=production
 
-# Copy the rest of the source files into the image.
+# Copy the source code for production (usually a lighter build)
 COPY . .
 
-# Run the application.
-CMD node --inspect src/app.js
+# Expose the port the app will run on
+EXPOSE 3000
 
-FROM base as dev
-RUN --mount=type=bind,source=package.json,target=package.json \
-    --mount=type=bind,source=package-lock.json,target=package-lock.json \
-    --mount=type=cache,target=/root/.npm \
-    npm ci --include=dev
-USER node
-COPY . .
-CMD npm run dev
+# Start the app in production mode
+CMD ["npm", "start"]
 
-FROM base as test
-ENV NODE_ENV test
-RUN --mount=type=bind,source=package.json,target=package.json \
-    --mount=type=bind,source=package-lock.json,target=package-lock.json \
-    --mount=type=cache,target=/root/.npm \
-    npm ci --include=dev
-USER node
+
+# Stage for Testing environment
+FROM base AS test
+ENV NODE_ENV=test
+# Install all dependencies (dev + prod)
+RUN npm install --only=development
+
+# Copy the source files for testing
 COPY . .
-RUN npm run test
+
+# Expose the test port (optional)
+EXPOSE 3000
+
+# Run the tests using Jest or any testing tool
+CMD ["npm", "test"]

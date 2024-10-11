@@ -3,10 +3,10 @@ name: ci
 on:
   push:
     branches:
-      - develop  # Trigger on the 'develop' branch
+      - main  # Trigger on the 'develop' branch
   pull_request:
     branches:
-      - develop    # Trigger on pull requests targeting 'develop'
+      - main    # Trigger on pull requests targeting 'develop'
 
 jobs:
   build:

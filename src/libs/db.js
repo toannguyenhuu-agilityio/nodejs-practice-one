@@ -2,7 +2,7 @@ import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join, resolve } from 'path';
 import Sequelize from 'sequelize';
-import { appConfig } from './config.js';
+import { appConfig } from '../../config/config.js';
 import dotenv from 'dotenv';
 
 dotenv.config();

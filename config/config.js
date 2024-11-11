@@ -1,28 +1,25 @@
-import path from 'path';
+// Libs
+import dotenv from 'dotenv';
 
-export default {
+dotenv.config();
+
+export const appConfig = {
   development: {
     username: 'root',
     password: null,
-    database: 'database_development',
-    host: '127.0.0.1',
     dialect: 'sqlite',
-    storage: path.resolve('db', 'yugioh.sqlite'),
+    storage: process.env.DATABASE_STORAGE || 'yugioh.sqlite',
   },
   test: {
     username: 'root',
     password: null,
-    database: 'database_test',
-    host: '127.0.0.1',
     dialect: 'sqlite',
-    storage: path.resolve('db', 'yugioh-test.sqlite'),
+    storage: 'yugioh_test.sqlite',
   },
   production: {
     username: 'root',
     password: null,
-    database: 'database_production',
-    host: '127.0.0.1',
     dialect: 'sqlite',
-    storage: path.resolve('db', 'yugioh-production.sqlite'),
+    storage: 'yugioh_prod.sqlite',
   },
 };

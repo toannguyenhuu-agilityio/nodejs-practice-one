@@ -1,20 +1,14 @@
 'use strict';
+
 /** @type {import('sequelize-cli').Migration} */
-
-const {
-  VALID_CARD_TYPES,
-  VALID_CARD_ATTRIBUTES,
-  VALID_CARD_SUB_TYPES,
-} = require('../src/constants/cards.js');
-
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Cards', {
       id: {
-        allowNull: false,
-        autoIncrement: true,
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
+        unique: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
       },
       number: {
         type: Sequelize.STRING,
@@ -28,14 +22,11 @@ module.exports = {
           notEmpty: true,
         },
       },
-      email: {
-        type: Sequelize.STRING,
-      },
       type: {
         type: Sequelize.STRING,
         allowNull: false,
         validate: {
-          isIn: [VALID_CARD_TYPES],
+          isIn: ['Monster', 'Trap', 'Spell'],
         },
       },
       image: {
@@ -47,13 +38,21 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
         validate: {
-          isIn: [VALID_CARD_ATTRIBUTES],
+          isIn: ['Dark', 'Light', 'Earth', 'Water', 'Fire', 'Wind', 'Divine'],
         },
       },
-      subtypes: {
+      subTypes: {
         type: Sequelize.TEXT,
         validate: {
-          isIn: [VALID_CARD_SUB_TYPES],
+          isIn: [
+            'Normal',
+            'Ritual',
+            'Effect',
+            'XYZ',
+            'Toon',
+            'Fusion',
+            'Synchro',
+          ],
         },
       },
       level: {
@@ -76,16 +75,9 @@ module.exports = {
         type: Sequelize.UUID,
         allowNull: false,
       },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
-      },
     });
   },
+
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Cards');
   },

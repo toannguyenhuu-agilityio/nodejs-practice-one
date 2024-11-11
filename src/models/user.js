@@ -47,7 +47,7 @@ const User = db.sequelize.define(
 );
 
 User.associate = (models) => {
-  User.hasMany(models.Task);
+  User.hasMany(models.Cards);
 };
 
 User.isPassword = (encodedPassword, password) =>

@@ -5,16 +5,17 @@ dotenv.config();
 
 export const appConfig = {
   development: {
+    database: 'database_development',
     dialect: 'sqlite',
-    storage: process.env.DATABASE_STORAGE || './db/yugioh.sqlite',
+    storage: 'db/yugioh.sqlite',
   },
   test: {
     dialect: 'sqlite',
-    storage: process.env.DATABASE_STORAGE || ':memory',
+    storage: ':memory',
   },
   production: {
     dialect: 'sqlite',
-    storage: process.env.DATABASE_STORAGE || './db/yugioh.sqlite',
+    storage: 'yugioh.sqlite',
   },
   jwtSecret: process.env.SECRET_KEY,
   jwtSession: { session: false },

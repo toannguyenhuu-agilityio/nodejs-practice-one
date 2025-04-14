@@ -1,6 +1,6 @@
 # Base image for Node.js
 ARG NODE_VERSION=20.12.0 
-FROM node:${NODE_VERSION}-alpine as base
+FROM node:${NODE_VERSION}-alpine AS base
 
 # Set the working directory inside the container
 WORKDIR /app

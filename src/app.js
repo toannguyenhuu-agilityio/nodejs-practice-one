@@ -75,7 +75,7 @@ app.use(errorHandler);
  */
 const startServer = async () => {
   try {
-    await db.sequelize.sync({ force: true });
+    await db.sequelize.sync({ force: false });
     console.log('Connection has been established successfully.');
     app.listen(PORT, () => console.log('Server running on port 3000'));
   } catch (error) {
